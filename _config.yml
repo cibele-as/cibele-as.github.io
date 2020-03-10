@@ -1,7 +1,7 @@
 ### Site Settings ###
 title               : Rafael Ribeiro
 description         : >-
-                      "Turning :coffee: into code since 2010."
+                      "Sometimes I break production."
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : rribeiro1/rribeiro1.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : YoussefRaafatNasry/portfolYOU
