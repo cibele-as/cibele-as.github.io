@@ -1,0 +1,3 @@
+- name: Make Coffee
+  percentage: 90
+  color: info

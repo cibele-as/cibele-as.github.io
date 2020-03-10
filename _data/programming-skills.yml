@@ -1,0 +1,3 @@
+- name: Problem Solver
+  percentage: 100
+  color: danger
