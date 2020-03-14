@@ -103,7 +103,7 @@ circleci local execute --job "build"
 ...
 ```
 
-If your job depends of `encrypted variables` which we configure using CircleCI's UI, we can setting those environment variables via the CLI:
+If your job depends on `encrypted variables` which we configure using CircleCI's UI, we can setting those environment variables via the CLI:
 
 ``` bash
 circleci local execute --job "jobname" --env MY_VARIABLE=MY_VALUE
