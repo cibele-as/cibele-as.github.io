@@ -1,19 +1,20 @@
 ---
 title: Testing CircleCI jobs locally
-tags: [CircleCI, Fasttips]
-style: border
-color: primary
-description: A quick way to test jobs in CircleCI locally
+tags: [CircleCI]
+style: fill
+color: info
+description: A quick way to validate and test CircleCI jobs locally
 ---
 
-This quick tutorial will give you a basic understanding of how to execute jobs locally in order to avoid basic errors.
+This quick tutorial will give you a basic understanding of how to execute CircleCI jobs locally not only to validade the
+yaml sintax but also to validade the functionality before executing it on CircleCI's environment. 
 
 ## The setup
 
-Download the CircleCI CLI, refer to docs [here](https://circleci.com/docs/2.0/local-cli/)
+Download the CircleCI CLI, refer to the installation docs [here](https://circleci.com/docs/2.0/local-cli/#installation)
 
 As a MAC/Linux user I've just needed to execute the command below:
-```
+``` bash
 curl -fLSs https://circle.ci/cli | bash
 ```
 
