@@ -45,6 +45,8 @@ author:
 ### Disqus ###
 disqus: rribeiro1-github-io
 
+### Google Analytics ###
+analytics: UA-163302221-1
 
 ### Posts ###
 permalink: /blog/:title
