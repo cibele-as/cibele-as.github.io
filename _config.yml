@@ -1,7 +1,7 @@
 ### Site Settings ###
 title               : Rafael Ribeiro
 description         : >-
-                      "Sometimes I break production."
+                      :wave: Hey, I am a software developer who loves to learn new technologies and approaches to solve problems and apply them as much as I can in projects I am working on.
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : rribeiro1/rribeiro1.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : rribeiro1/portfolyou-ribeiro
@@ -22,7 +22,7 @@ nav_exclude:                                            # The following paths ar
 ### Author Info ###
 author:
   name              : Ribeiro
-  image             : photo.jpg
+  image             : foto.jpg
 # behance           : your_username
 # dribbble          : your_username
   email             : rafael.pr10@gmail.com
