@@ -4,7 +4,7 @@ description         : >-
                       "Sometimes I break production."
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : rribeiro1/rribeiro1.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
-remote_theme        : rribeiro1/test
+remote_theme        : rribeiro1/portfolyou-ribeiro
 
 
 ### Plugins ###
@@ -29,7 +29,7 @@ author:
 # facebook          : your_username
   github            : rribeiro1
 # gitlab            : your_username
-  instagram         : rpribeiro1
+  instagram         : rafprib
   linkedin          : rribeiro10
 # medium            : your_username
 # soundcloud        : your_username
