@@ -1,16 +1,14 @@
 ### Site Settings ###
 title               : Rafael Ribeiro
 description         : >-
-                      :wave: Hey, I am a software developer who loves to learn new technologies and approaches to solve problems and apply them as much as I can in projects I am working on.
-baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
+                      :wave: Welcome! here I will share articles related to programming. 
+baseurl             : ""                                # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : rribeiro1/rribeiro1.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : rribeiro1/portfolyou-ribeiro
-
 
 ### Plugins ###
 plugins:
   - jemoji
-
 
 ### Navbar Settings ###
 nav_exclude:                                            # The following paths are excluded from navbar
@@ -18,7 +16,6 @@ nav_exclude:                                            # The following paths ar
   - pages/404.html
   - pages/index.md
   
-
 ### Author Info ###
 author:
   name              : Ribeiro
@@ -41,7 +38,6 @@ author:
 # vimeo             : your_username
 # youtube           : your_channel_name
 
-
 ### Disqus ###
 disqus: rribeiro1-github-io
 
@@ -51,13 +47,11 @@ analytics: UA-163302221-1
 ### Posts ###
 permalink: /blog/:title
 
-
 ### Collections ###
 collections:
   projects:
     output: true
     permalink: /projects/:name
-
 
 ### Defaults for collections ###
 defaults:
