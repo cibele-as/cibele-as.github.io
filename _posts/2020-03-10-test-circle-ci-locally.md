@@ -5,15 +5,15 @@ style: fill
 color: info
 ---
 
-This quick tutorial will give you a basic understanding of how to execute CircleCI jobs locally not only to validade the
-yaml sintax but also to validade the functionality before executing it on CircleCI's environment. 
+This quick tutorial will give you a basic understanding of how to execute CircleCI jobs locally not only to validate the
+yaml sintax but also to validate the functionality before executing it on CircleCI's environment.
 
 ## The setup
 
 Download the CircleCI CLI, refer to the installation docs [here](https://circleci.com/docs/2.0/local-cli/#installation)
 
 As a MAC/Linux user I've just needed to execute the command below:
-``` bash
+```bash
 curl -fLSs https://circle.ci/cli | bash
 ```
 
@@ -31,17 +31,11 @@ jobs:
     work_directory: ~/forum-app
     docker:
       - image: circleci/openjdk:8-jdk
-
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/postgres:9.4
 
     environment:
-      CC_TEST_REPORTER_ID: 1c273b4ec0fadb0df1aa101329e35d9e88f39ad5cee2de302c1a2c3e765f4764
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
-      TERM: dumb
 
     steps:
       - checkout
@@ -77,7 +71,7 @@ jobs:
 
 Once the CircleCI cli is installed we can use the `validate` command by executing: 
 
-``` bash
+```bash
 circleci config validate -c .circleci/config.yml
 
 # Config file at .circleci/config.yml is valid.
@@ -85,13 +79,13 @@ circleci config validate -c .circleci/config.yml
 
 And to run a job locally, use the local execute command:
 
-``` bash
+```bash
 circleci local execute --job "jobname"
 ```
 
 In our case, the job is `build`, but you can eventually have more jobs.
 
-``` bash
+```bash
 circleci local execute --job "build"
 
 # Downloading latest CircleCI build agent...
@@ -105,7 +99,7 @@ circleci local execute --job "build"
 
 If your job depends on `encrypted variables` which we configure using CircleCI's UI, we can setting those environment variables via the CLI:
 
-``` bash
+```bash
 circleci local execute --job "jobname" --env MY_VARIABLE=MY_VALUE
 ```
 
