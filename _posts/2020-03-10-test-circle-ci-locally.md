@@ -2,7 +2,7 @@
 title: Testing CircleCI jobs locally
 tags: [CircleCI]
 style: fill
-color: info
+color: dark
 ---
 
 This quick tutorial will give you a basic understanding of how to execute CircleCI jobs locally not only to validate the
