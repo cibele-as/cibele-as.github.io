@@ -5,40 +5,39 @@ style: fill
 color: success
 ---
 
-Who never had a surprise when checking the billing panel from Amazon, google or another cloud provider? It happened 
-with me a couple of times when checking my AWS personal account and I am sure it happens with you as well as in your 
-organisation 😅
+Who never had a surprise when checking the billing panel from Amazon, google, or another cloud provider? It happened 
+with me, a couple of times when checking my AWS personal account and I am sure it happens with you as well as in your 
+organization 😅
 
 ## Common problems and motivations 💸
 
 It’s not rare that we sometimes think a service would cost X and it ends up costing 2X in the final of the month, 
 sometimes we also create resources manually for experimentations and forget to clean them up, on the other hand, 
-its not healthy to access the billings everyday to check whether the costs is okay or not, so the best way 
-to avoid surprises in the end of the month would be automate this process by creating some sort of alarms when 
+it is not healthy to access the billings every day to check whether the costs are okay or not, so the best way 
+to avoid surprises at the end of the month would be automating this process and creating some sort of alarms when 
 something is wrong.
 
 Is this post we are going to create a process to keep track of our billings in AWS by defining a threshold in the account
 level as well as by services level and also creating an integration with Slack since I have seen that people prefer slack 
-rather than email, for that we are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration in order to send alarms from our account to a specific channel in Slack.
+rather than email, for that, we are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to send alarms from our account to a specific channel in Slack.
 
 ## Implementation Scenario
 
-Using AWS Billings its possible to keep track of costs using a lot of approaches, for instance, resources tags where we can 
-filter costs by a specific business or teams, also resources names using amazon services names, etc. Its possible to set alarms
-when for forecasts values or current values.
+Using AWS Billings its possible to keep track of costs using a lot of approaches, for instance, resource tags where we can filter costs by a specific business or teams, resource names using amazon services names, etc. It is possible to set alarms
+when for forecast values or current values.
 
-In our study case, we have a `development account` in AWS and we basically use two services `EC2` and `S3`, looking into
-the previous billing we usually pay for those:
+In our study case, we have a `development account` in AWS and we use two services `EC2` and `S3`, looking into the previous 
+billing we usually pay for those:
 
 - **EC2:** $ 10,00 
 - **S3:** $ 5,00
 
-We also want to reserve $ 5,00 in the account for eventual costs, in the end what we need to achieve is:
+We also want to reserve $ 5,00 in the account for eventual costs, in the end, what we need to achieve is:
 
 Receive an alert when:
-- Forecast ammount for the `Development account` is `greater than 20,00`
-- Forecast ammount for `EC2` is `greater than 10,00`
-- Forecast ammount for `S3` is `greater than 5,00`
+- Forecast amount for the `Development account` is `greater than 20,00`
+- Forecast amount for `EC2` is `greater than 10,00`
+- Forecast amount for `S3` is `greater than 5,00`
 
 After implementing the module in terraform, we are going to use it like this:
 
@@ -159,10 +158,7 @@ variable "aws_services_map" {
   }
 }
 ```
-
-Now, we can implement the budgets module, lets start by creating a SNS topic so that when an alarm is triggered, it will
-sent a message in this topic and everyone subscribed in this topic will receive the message, in our case it will be the 
-email app for slack, we will get into that later.
+Now, we can implement the budgets module, let's start by creating a SNS topic so that when an alarm is triggered, it will send a message in this topic and everyone subscribed in this topic will receive the message, in our case, it will be the email app for slack, we will get into that later.
 
 #### Budget Module
 
@@ -203,8 +199,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
 }
 ```
 
-Once we have a topic, we can create the budget resource for the account level and subscribe it to the topic.
-
+Once we have a topic, we can create a budget resource for the account level and subscribe to the topic.
 
 ``` hcl
 # modules/budgets/main.tf
@@ -233,7 +228,7 @@ resource "aws_budgets_budget" "budget_account" {
 }
 ```
 
-The last resource will be create budgets for services, it will receive a list of services and create a budget for each one.
+The last resource will be the budgets for services, it will receive a list of services and create a budget for each one.
 
 ``` hcl
 # modules/budgets/main.tf
@@ -303,7 +298,7 @@ $ terraform plan
 $ terraform apply
 ```
 
-After applying you should have the budgets as shown bellow:
+After applying you should have the budgets as shown below:
 
 ![budgets.png](/assets/public/budgets.png)
 
@@ -315,12 +310,11 @@ Last step is to subscribe to this topic via Email app in Slack or any email.
 
 ## Slack or Email Integration 
 
-If you have a slack paid plan, you can use the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration, it basically
-provides a custom email to be used in the slack channel, thus, every email that is sent to this account will appear in the channel.
+If you have a slack paid plan, you can use the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration, it provides a custom email to be used in the slack channel, thus, every email that is sent to this account will appear in the channel.
 
 I don't have a pro slack plan, so for simplicity, I will use my email for it, however, the process would be the same using the email integration app or email. 
 
-**Note:** This part of the process is not support by Terraform, so we are going to do it manually. 
+**Note:** This part of the process is not supported by Terraform, so we are going to do it manually. 
 
 ### Subscribing the email to the topic
 
@@ -328,7 +322,7 @@ Go to SNS panel in AWS and select `Subscriptions` and create a new subscription 
 
 ![subscription.png](/assets/public/subscription.png)
 
-From now on, every time you hit a threshold you will receive a email notification like this:
+From now on, every time you hit a threshold you will receive an email notification like this:
 
 ```
 AWS Budget Notification May 04, 2020
@@ -337,13 +331,13 @@ AWS Account XXXXXXXXX
 Dear AWS Customer,
 
 You requested that we alert you when the FORECASTED Cost associated with your 
-Staging EC2 Monthly Budget is greater than $10.00 for the current month. 
+Development EC2 Monthly Budget is greater than $10.00 for the current month. 
 
 The FORECASTED Cost associated with this budget is $15.00. 
 
 You can find additional details below and by accessing the AWS Budgets dashboard.
 
-Budget Name: Staging EC2 Monthly Budget
+Budget Name: Development EC2 Monthly Budget
 Budget Type: Cost
 Budgeted Amount: $10.00
 Alert Type: FORECASTED
