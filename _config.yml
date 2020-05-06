@@ -9,6 +9,7 @@ remote_theme        : YoussefRaafatNasry/portfolYOU
 ### Plugins ###
 plugins:
   - jemoji
+  - jekyll-analytics
 
 ### Navbar Settings ###
 nav_exclude:                                            # The following paths are excluded from navbar
@@ -42,7 +43,9 @@ author:
 disqus: rribeiro1-github-io
 
 ### Google Analytics ###
-analytics: UA-163302221-1
+jekyll_analytics:
+  GoogleAnalytics:          
+    id: UA-163302221-1
 
 ### Posts ###
 permalink: /blog/:title
