@@ -43,21 +43,19 @@ After implementing the module in terraform, we are going to use it like this:
 
 ``` hcl
 module "billing_alarm" {
-  # import module
+  source = "./../../modules/budgets"
 
   account_name         = "Development"
   account_budget_limit = "20.0"
 
-  services = [
-    {
-      name         = "EC2"
+  services = {
+    EC2 = {
       budget_limit = "10.0"
     },
-    {
-      name         = "S3"
+    S3 = {
       budget_limit = "5.0"
-    },
-  ]
+    }
+  }
 }
 ```
 
@@ -66,15 +64,19 @@ module "billing_alarm" {
 Let’s get started by creating a terraform module so that we can reuse in cases where we have more than one account, 
 our folder's structure will be something like this:
 
-``` yaml
-accounts:
-  developments:
-    - budgets.tf # implements module budgets
-modules:
-  budgets:
-     - main.tf
-     - variables.tf
-     - services.tf
+``` bash
+.
+├── README.md
+├── accounts
+│   └── development
+│       ├── budgets.tf
+│       └── provider.tf     
+│       
+└── modules
+    └── budgets
+        ├── main.tf
+        ├── services.tf
+        └── variables.tf
 ```
 
 #### Input Variables 
@@ -95,8 +97,7 @@ variable "account_budget_limit" {}
 variable "services" {
   description = "List of AWS services to be monitored in terms of costs"
 
-  type = list(object({
-    name         = string,
+  type = map(object({
     budget_limit = string
   }))
 }
@@ -234,17 +235,17 @@ The last resource will be the budgets for services, it will receive a list of se
 # modules/budgets/main.tf
 
 resource "aws_budgets_budget" "budget_resources" {
-  count = length(var.services)
+  for_each = var.services
 
-  name              = "${var.account_name} ${lookup(var.services[count.index], "name")} Monthly Budget"
+  name              = "${var.account_name} ${each.key} Monthly Budget"
   budget_type       = "COST"
-  limit_amount      = lookup(var.services[count.index], "budget_limit")
+  limit_amount      = each.value.budget_limit
   limit_unit        = "USD"
   time_unit         = "MONTHLY"
   time_period_start = "2020-01-01_00:00"
 
   cost_filters = {
-    Service = lookup(var.aws_services_map, lookup(var.services[count.index], "name"))
+    Service = lookup(var.aws_services_map, each.key)
   }
 
   notification {
@@ -270,21 +271,19 @@ in the account folder and import the module, like this:
 # accounts/development/budgets.tf
 
 module "billing_alarm" {
-  source = "../../modules/budgets"
+  source = "./../../modules/budgets"
 
   account_name         = "Development"
   account_budget_limit = "20.0"
 
-  services = [
-    {
-      name         = "EC2"
+  services = {
+    EC2 = {
       budget_limit = "10.0"
     },
-    {
-      name         = "S3"
+    S3 = {
       budget_limit = "5.0"
-    },
-  ]
+    }
+  }
 }
 ```
 
