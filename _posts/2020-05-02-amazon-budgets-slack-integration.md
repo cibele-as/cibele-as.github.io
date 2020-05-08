@@ -66,7 +66,6 @@ our folder's structure will be something like this:
 
 ``` bash
 .
-├── README.md
 ├── accounts
 │   └── development
 │       ├── budgets.tf
