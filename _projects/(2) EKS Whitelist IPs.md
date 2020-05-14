@@ -104,15 +104,15 @@ jobs:
           cluster-name: eks-cluster-name
           aws-region: eu-central-1
           custom-cidrs: "1.1.1.1/32, 2.2.2.2/32"
-          role-arn: arn:aws:iam::1111111111111:role/EksCircleCiRole
+          role-arn: arn:aws:iam::1111111111111:role/SomeRole
 
       - aws-eks-whitelist-circleci-ip/remove:
-          cluster-name: eks-labtwin-staging-cluster
+          cluster-name: eks-cluster-name
           aws-region: eu-central-1
           keep-cidrs: "1.1.1.1/32"
-          role-arn: arn:aws:iam::1111111111111:role/EksCircleCiRole
+          role-arn: arn:aws:iam::1111111111111:role/SomeRole
 ```
 
 <p class="text-center">
-  {% include elements/button.html link="https://github.com/rribeiro1/eks-whitelist-ips" text="Check the Source Code" %}
+  {% include elements/button.html link="https://circleci.com/orbs/registry/orb/rribeiro1/aws-eks-whitelist-circleci-ip" text="Check the Source Code" %}
 </p>
