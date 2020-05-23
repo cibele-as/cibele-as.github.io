@@ -3,7 +3,7 @@ title       : Rafael Ribeiro
 description : Welcome! here I will share articles related to programming. 
 baseurl     : ""     
 repository  : rribeiro1/rribeiro1.github.io
-remote_theme: YoussefRaafatNasry/portfolYOU
+remote_theme: rribeiro1/portfolYOU@analytics
 
 ### Plugins ###
 plugins:
@@ -40,10 +40,11 @@ author:
 ### Disqus ###
 disqus: rribeiro1-github-io
 
-### Google Analytics ###
-jekyll_analytics:
-  GoogleAnalytics:          
-    id: UA-163302221-1
+### Analytics ###
+analytics:
+  enabled: true  # Set false to disable analytics feature
+  google:
+    tracking_id: UA-163302221-1 # your google analytics tracking-id
 
 ### Posts ###
 permalink: /blog/:title
