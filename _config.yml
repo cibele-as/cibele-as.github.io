@@ -1,9 +1,10 @@
 ### Site Settings ###
 title       : Rafael Ribeiro
+keywords    : terraform, aws, circleci. 
 description : Welcome! here I will share articles related to programming. 
 baseurl     : ""     
 repository  : rribeiro1/rribeiro1.github.io
-remote_theme: rribeiro1/portfolYOU@analytics
+remote_theme: rribeiro1/jekyll-theme
 
 ### Plugins ###
 plugins:
