@@ -1,6 +1,6 @@
 ---
-title: Creating budget alarms in AWS using Terraform and integrate with Slack or Email
-tags: [AWS, Terraform]
+title: Billings alarms for AWS accounts using Terraform
+tags: [aws, terraform, budgets]
 style: fill
 color: success
 ---
