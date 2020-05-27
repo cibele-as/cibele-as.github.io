@@ -110,10 +110,8 @@ file called `service.tf`
 ``` hcl
 # modules/budgets/service.tf
 
-variable "aws_services_map" {
-  type = map(string)
-
-  default = {
+locals {
+  aws_services = {
     Athena         = "Amazon Athena"
     EC2            = "Amazon Elastic Compute Cloud - Compute"
     ECR            = "Amazon EC2 Container Registry (ECR)"
@@ -244,7 +242,7 @@ resource "aws_budgets_budget" "budget_resources" {
   time_period_start = "2020-01-01_00:00"
 
   cost_filters = {
-    Service = lookup(var.aws_services_map, each.key)
+    Service = lookup(local.aws_services, each.key)
   }
 
   notification {
