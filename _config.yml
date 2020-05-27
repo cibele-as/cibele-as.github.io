@@ -1,7 +1,7 @@
 ### Site Settings ###
 title       : Rafael Ribeiro
-keywords    : Rafael Ribeiro, devops, development, terraform, aws, circleci.
-description : Welcome! here I will share articles related to programming. 
+keywords    : Topics in Devops, Terraform, AWS, CI/CD. 
+description : Welcome! here I will share articles related to devops and programming in general. 
 baseurl     : ""     
 repository  : rribeiro1/rribeiro1.github.io
 remote_theme: rribeiro1/jekyll-theme
