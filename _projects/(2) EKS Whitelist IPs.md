@@ -2,7 +2,7 @@
 name: Orb to whitelist CircleCI public IP on AWS EKS Cluster
 tools: [CircleCI, Orb, AWS]
 image: https://circleci.com/blog/media/DesigningPackageManager.png
-description: This CircleCI orb aims to get the public ip address of the current CircleCI build machine and add it in the source whitelist on EKS cluster. 
+description: This CircleCI orb aims to get the public ip address of the current CircleCI build machine and add it in the source whitelist on EKS cluster.
 ---
 
 # Orb AWS EKS Dynamic IP Whitelisting. 

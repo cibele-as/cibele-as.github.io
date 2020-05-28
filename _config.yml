@@ -6,9 +6,13 @@ baseurl     : ""
 repository  : rribeiro1/rribeiro1.github.io
 remote_theme: rribeiro1/jekyll-theme
 
+### Sitemap ###
+url: "https://rafaelribeiro.io"
+
 ### Plugins ###
 plugins:
   - jemoji
+  - jekyll-sitemap
 
 ### Navbar Settings ###
 nav_exclude:                                            # The following paths are excluded from navbar
