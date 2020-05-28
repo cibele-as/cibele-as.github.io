@@ -14,18 +14,14 @@ The orb is available in the [CircleCI Orb Registry](https://circleci.com/orbs/re
 ## Motivation
 
 After creating an Amazon Elastic Kubernetes Cluster (EKS) we receive a public endpoint to access the cluster and by 
-default it is open to all traffic `0.0.0.0/0`. to date, it is not managed using Security groups so that to restrict 
-this access to a specific CIDR, we should either use the web console or AWS CLI.
+default it is open to all traffic `0.0.0.0/0`. to date, the public access endpoint is not managed using Security groups so that to restrict the access to a specific CIDR, we should either use the web console or [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/eks/update-cluster-config.html).
 
-For the sake of security, we should only allow traffic coming from addresses we trusted on to reach the public endpoint 
-in EKS, for instance, the company VPN CIDR for internal access or, in this case, CircleCI access to create deployments 
-as part of continuous integration, here we face another problem, to date, CircleCI does not have a static IP as 
-discussed [here](https://support.circleci.com/hc/en-us/articles/115014372807-IP-Address-ranges-for-whitelisting-Do-you-have-static-IP-addresses-available-), 
-thus, one of the possibilities to implement this could be using **Dynamic Whitelisting**.
+For the sake of security, we should only allow traffic coming from addresses we trust on, for instance, some VPN for internal access or, in this case, granting CircleCI access to create deployments as part of the continuous integration, here we face another problem, to date, CircleCI does not have a static IP as discussed [here](https://support.circleci.com/hc/en-us/articles/115014372807-IP-Address-ranges-for-whitelisting-Do-you-have-static-IP-addresses-available-), 
+thus, one of the possibilities to deal with it is by creating a **Dynamic Whitelisting** mechanism.
 
 ## Dynamic Whitelisting
 
-Basically, we dynamically fetch the current IP address from the builder machine and add it to the source whitelist in EKS, at the end of the build or if something goes wrong during this process, we remove the IP address to prevent having leftover IPs.
+Basically, we dynamically fetch the current IP address from the CircleCI builder machine and add it to the source whitelist in EKS, at the end of the build or if something goes wrong during this process, we remove the IP address to prevent having leftover IPs.
 
 ### IAM Setup
 
@@ -114,5 +110,5 @@ jobs:
 ```
 
 <p class="text-center">
-  {% include elements/button.html link="https://circleci.com/orbs/registry/orb/rribeiro1/aws-eks-whitelist-circleci-ip" text="Check the Source Code" %}
+  {% include elements/button.html link="https://circleci.com/orbs/registry/orb/rribeiro1/aws-eks-whitelist-circleci-ip" text="Check the Circleci Registry for more details" %}
 </p>
