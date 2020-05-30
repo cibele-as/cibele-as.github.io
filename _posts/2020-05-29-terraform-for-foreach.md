@@ -1,5 +1,5 @@
 ---
-title: Terraform version 0.12 from count to foreach.
+title: "Terraform lops: from count to foreach."
 tags: [aws, terraform, foreach, count]
 style: fill
 color: light
