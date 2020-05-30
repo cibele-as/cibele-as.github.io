@@ -10,6 +10,8 @@ Terraform users from version **0.11** may have dynamically created some resource
 
 However, one of the problems we face using `count` is related to {% include elements/highlight.html text="ordering." %} Count maintains an array of numeric index (list) to perform it's operations. If there is a change in the order of the list, terraform will re-create the list again, we will get into that later. 
 
+![alt text](https://media.giphy.com/media/U3CAeMs6h2SEU/giphy.gif)
+
 Let's walk through a scenario to understand it better. 
 
 We want to create a list of users in AWS which represents our team members, for the sake of simplicity, the team is composed of 3 developers. Thus, we probably would start with that:
@@ -51,7 +53,7 @@ resource "aws_iam_user" "users" {
 }
 ```
 
-We can recreate users, now using the new module, note that now we can easily increment the list as soon as a new member joins the team:
+We can re-create users, now using the new module, note that now we can easily increment the list as soon as a new member joins the team:
 
 ``` hcl
 # Applying the module users - production/users.tf
@@ -118,6 +120,7 @@ And `terraform apply`:
 ```
 
 Awesome, isn't it? well, until one of the developers leaves the company! 💀
+
 It turns out that developer João is out of the team and now we have to remove him from the list of users, it should be easy to remove, right? well, maybe not.  
 
 ``` hcl
@@ -238,6 +241,8 @@ Plan: 0 to add, 0 to change, 1 to destroy.
 ```
 
 From now on, only the resources removed from the list will be destroyed 😃
+
+![alt text](https://media.giphy.com/media/111ebonMs90YLu/giphy.gif)
 
 In the next post, we are going to combine `for_each`, `for`, and `flatten` to create more complex modules that are easily maintainable and readable. 
 
