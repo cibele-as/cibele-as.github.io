@@ -121,7 +121,7 @@ And `terraform apply`:
 
 Awesome, isn't it? well, until one of the developers leaves the company! 💀
 
-It turns out that developer João is out of the team and now we have to remove him from the list of users, it should be easy to remove, right? well, maybe not.  
+It turns out that João is out of the team and now we have to remove him from the list of users, it should be easy to remove, right? well, maybe not.  
 
 ``` hcl
 # Applying the module users - production/users.tf
