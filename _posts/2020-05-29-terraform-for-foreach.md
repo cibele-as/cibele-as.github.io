@@ -1,16 +1,18 @@
 ---
 title: Terraform version 0.12 from count to foreach.
-tags: [aws, terraform, foreach]
+tags: [aws, terraform, foreach, count]
 style: fill
-color: primary
+color: light
 description: Terraform users from version 0.11 may have dynamically created some resources using the count statement, very handy to apply DRY principle and scale resources by simply increment an element in a list or number.
 ---
 
-Terraform users from version **0.11** may have dynamically created some resources using the `count` statement, very handy to apply [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle and scale resources by simply increment an element in a list or number.
+Terraform users from version **0.11** may have dynamically created some resources using the `count` statement, very handy to apply [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle and scale resources by simply increment an element in a list or number. 
+
+However, one of the problems we face using `count` is related to {% include elements/highlight.html text="ordering." %} Count maintains an array of numeric index (list) to perform it's operations. If there is a change in the order of the list, terraform will re-create the list again, we will get into that later. 
 
 Let's walk through a scenario to understand it better. 
 
-Let's suppose we want to create a list of users in AWS which represents our team members, for the sake of simplicity, the team is composed of 3 developers. Thus, we probably would start with that:
+We want to create a list of users in AWS which represents our team members, for the sake of simplicity, the team is composed of 3 developers. Thus, we probably would start with that:
 
 ``` hcl
 resource "aws_iam_user" "joao" {
@@ -26,7 +28,7 @@ resource "aws_iam_user" "caio" {
 }
 ```
 
-The company is going very well and now 6 developers joint to the team, then you think, maybe creating more 6 users manually would not be a bad idea, however, the scenario describes a simple resource from AWS that requires only the name of the user, imagine another resource which requires dozens of parameters.
+The company is going very well and now 6 developers joint to the team, then you think, maybe creating more 6 users manually would not be a bad idea, however, the scenario describes a simple resource from AWS that requires only the name of the user, imagine another resource which requires dozens of parameters. 
 
 After exploring the alternatives, we find the `count` parameter and decided to extract this to a module `users`.
 
@@ -179,7 +181,7 @@ Terraform will perform the following actions:
 Plan: 0 to add, 2 to change, 1 to destroy.
 ```
 
-In fact, **Removing elements from lists will force terraform to recreate the lists again.** Well, here is where the `for_each` statement comes into play, let's see how it solves the problem.
+In fact, {% include elements/highlight.html text="Removing elements from lists will force terraform to recreate the lists again." %} Well, here is where the `for_each` statement comes into play, let's see how it solves the problem.
 
 ## **Using `for_each`**:
 
