@@ -1,5 +1,5 @@
 ---
-title: "Terraform lops: from count to foreach."
+title: "Terraform loops: from count to foreach."
 tags: [aws, terraform, foreach, count]
 style: fill
 color: light
