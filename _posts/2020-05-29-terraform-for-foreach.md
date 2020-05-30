@@ -32,7 +32,7 @@ resource "aws_iam_user" "caio" {
 
 The company is going very well and now 6 developers joint to the team, then you think, maybe creating more 6 users manually would not be a bad idea, however, the scenario describes a simple resource from AWS that requires only the name of the user, imagine another resource which requires dozens of parameters. 
 
-After exploring the alternatives, we find the `count` parameter and decided to extract this to a module `users`.
+After exploring the alternatives, we find the `count` parameter and decide to extract this to a module `users`.
 
 ## **Using `count`**:
 
