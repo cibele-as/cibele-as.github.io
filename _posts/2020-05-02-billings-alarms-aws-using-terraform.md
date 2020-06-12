@@ -1,6 +1,6 @@
 ---
-title: Billings alarms for AWS accounts using Terraform
-tags: [aws, terraform, budgets]
+title: Budgets alarms for AWS accounts and services using Terraform
+tags: [aws, budgets, terraform]
 style: fill
 color: success
 ---

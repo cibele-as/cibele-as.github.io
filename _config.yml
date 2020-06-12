@@ -45,14 +45,14 @@ author:
 ### Disqus ###
 disqus: rribeiro1-github-io
 
+### Google AdSense ###
+adsense: ca-pub-1181535768755677
+
 ### Analytics ###
 analytics:
   enabled: true  # Set false to disable analytics feature
   google:
     tracking_id: UA-163302221-1 # your google analytics tracking-id
-
-### Google AdSense ###
-adsense: ca-pub-1181535768755677
 
 ### Posts ###
 permalink: /blog/:title
