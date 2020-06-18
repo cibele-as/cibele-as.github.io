@@ -1,6 +1,6 @@
 ---
 title: Budgets alarms for AWS accounts and services using Terraform
-tags: [aws, budgets, terraform]
+tags: [aws, budgets, terraform, slack, email]
 style: fill
 color: success
 ---
@@ -20,6 +20,10 @@ something is wrong.
 Is this post we are going to create a process to keep track of our billings in AWS by defining a threshold in the account
 level as well as by services level and also creating an integration with Slack since I have seen that people prefer slack 
 rather than email, for that, we are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to send alarms from our account to a specific channel in Slack.
+
+## Prerequisites
+
+This guide assumes some basic familiarity with the usual Terraform init, plan and apply workflow. It also assumes that you have your terraform and AWS CLI properly configured.
 
 ## Implementation Scenario
 
