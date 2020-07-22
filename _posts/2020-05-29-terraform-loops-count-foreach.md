@@ -16,7 +16,7 @@ Let's walk through a scenario to understand it better.
 
 We want to create a list of users in AWS which represents our team members, for the sake of simplicity, the team is composed of 3 developers. Thus, we probably would start with that:
 
-``` hcl
+```tf
 resource "aws_iam_user" "joao" {
   name = "joao-neves"
 }
@@ -38,7 +38,7 @@ After exploring the alternatives, we find the `count` parameter and decide to ex
 
 We create a module where we will receive a list of users in the variable `users` and then, we get the length of users and assign to count so that we can create user resources dynamically:
 
-``` hcl
+```tf
 # Module users - modules/users.tf
 
 variable "users" {
@@ -55,7 +55,7 @@ resource "aws_iam_user" "users" {
 
 We can re-create users, now using the new module, note that now we can easily increment the list as soon as a new member joins the team:
 
-``` hcl
+```tf
 # Applying the module users - production/users.tf
 
 module "users" {
@@ -123,7 +123,7 @@ Awesome, isn't it? well, until one of the developers leaves the company! 💀
 
 It turns out that João is out of the team and now we have to remove him from the list of users, it should be easy to remove, right? well, maybe not.  
 
-``` hcl
+```tf
 # Applying the module users - production/users.tf
 
 module "users" {
@@ -192,7 +192,7 @@ The `for_each` statement was introduced in Terraform 0.12.6 and one of its benef
 
 Let's change our module implementation then.
 
-``` hcl
+```tf
 variable "users" {
   type = map(string) # Type is a map of strings now.
 }
@@ -205,7 +205,7 @@ resource "aws_iam_user" "users" {
 
 And the implementation would be something like that: 
 
-``` hcl
+```tf
 module "users" {
   source = "../../modules/users"
 

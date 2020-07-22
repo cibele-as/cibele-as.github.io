@@ -62,9 +62,9 @@ Quando buscamos por infrastrutura como código ainda é possível encontrar refe
 
 Algumas vantagens que eu percebo no dia-a-dia ao trabalhar com Terraform:
 
-- A linguagem HCL é fácil de se entender e utilizar, o script abaixo cria um Bucket S3:
+- A linguagem HCL é fácil de se entender e utilizar, por exemplo, o script abaixo cria um Bucket S3:
 
-``` hcl
+```tf
 resource "aws_s3_bucket" "b" {
   bucket = "my-tf-test-bucket"
   acl    = "private"
@@ -75,8 +75,8 @@ resource "aws_s3_bucket" "b" {
   }
 }
 ```
-- Workflow do Terraform é simples
 
+- Workflow do Terraform é simples, escrever configuração, planejar e aplicar e o ciclo se repete.
 - A documentação da infrastrutura passa ser o próprio código, e o código por sua vez é versionado, dessa forma podemos traçar todas as iterações criadas em nossa infrastrutura;
 - Utilizando Terraform também é possível provisionar e gerenciar clusteres de Kubernetes (Utilizando Amazon EKS ou próprio projeto Kops com EC2) ou até mesmo Puppet, como falado previamente neste post, a lista de provedores é imensa, dessa forma, conseguimos de forma centralizada provisionar e gerenciar nossa infrastrutura utilizando uma só ferramenta;
 - É possível armazenar o estado da infrastrutura em backends em Buckets (AWS S3), banco de dados, etc. Ainda é possível criar mecanismos de Lock para evitar que dois membros do time alterem o mesmo recurso de infrastrutura em um mesmo momento.

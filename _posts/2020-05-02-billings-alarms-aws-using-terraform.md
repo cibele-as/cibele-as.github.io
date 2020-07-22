@@ -45,7 +45,7 @@ Receive an alert when:
 
 After implementing the module in terraform, we are going to use it like this:
 
-``` hcl
+```tf
 module "billing_alarm" {
   source = "./../../modules/budgets"
 
@@ -62,6 +62,12 @@ module "billing_alarm" {
   }
 }
 ```
+
+## Before Starting
+
+This guide aims to teach you how to create a module from scratch, however, if you in a hurry, you can just use the module by clicking on the button below.
+
+{% include elements/button.html link="https://registry.terraform.io/modules/rribeiro1/budget-alarms/aws/0.0.2" text="Terraform Registry" block=true  style="primary" size="sm" %}
 
 ## Terraform Module Structure
 
@@ -90,7 +96,7 @@ First, create the directory `modules/budgets` and the file `variables.tf`, it wi
 - **Account budget limit:** Threshold cost for the account level.
 - **Services:** List of AWS services to be tracked, we need to inform the name and values for each service.
 
-``` hcl
+```tf
 # modules/budgets/variables.tf
 
 variable "account_name" {}
@@ -111,7 +117,7 @@ variable "services" {
 The name of the service should match the name AWS expects otherwise the filter will not work properly, thus, we can create a support map to define some common services (if the service you want is not listed here you can add it later), in the same folder create a new
 file called `service.tf`
 
-``` hcl
+```tf
 # modules/budgets/service.tf
 
 locals {
@@ -166,7 +172,7 @@ Now, we can implement the budgets module, let's start by creating a SNS topic so
 
 Here we are creating a new topic and defining a policy that allows AWS budgets to Publish Message.
 
-``` hcl
+```tf
 # modules/budgets/main.tf
 
 resource "aws_sns_topic" "account_billing_alarm_topic" {
@@ -203,7 +209,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
 
 Once we have a topic, we can create a budget resource for the account level and subscribe to the topic.
 
-``` hcl
+```tf
 # modules/budgets/main.tf
 
 resource "aws_budgets_budget" "budget_account" {
@@ -232,7 +238,7 @@ resource "aws_budgets_budget" "budget_account" {
 
 The last resource will be the budgets for services, it will receive a list of services and create a budget for each one.
 
-``` hcl
+```tf
 # modules/budgets/main.tf
 
 resource "aws_budgets_budget" "budget_resources" {
@@ -268,7 +274,7 @@ resource "aws_budgets_budget" "budget_resources" {
 The module is complete, now we can easily reuse in our amazon accounts, to do so, create a `budgets.tf`
 in the account folder and import the module, like this:
 
-``` hcl
+```tf
 # accounts/development/budgets.tf
 
 module "billing_alarm" {
