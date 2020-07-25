@@ -3,6 +3,7 @@ title: Budgets alarms for AWS accounts and services using Terraform
 tags: [aws, budgets, terraform, slack, email]
 style: fill
 color: success
+language: 🇬🇧
 ---
 
 Who never had a surprise when checking the billing panel from Amazon, google, or another cloud provider? It happened 

@@ -4,6 +4,7 @@ tags: [aws, terraform, for_each, count]
 style: fill
 color: light
 description: Terraform users from version 0.11 may have dynamically created some resources using the count statement, very handy to apply DRY principle and scale resources by simply increment an element in a list or number.
+language: 🇬🇧
 ---
 
 Terraform users from version **0.11** may have dynamically created some resources using the `count` statement, very handy to apply [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle and scale resources by simply increment an element in a list or number. 

@@ -4,6 +4,7 @@ tags: [introdução terraform, terraform, aws, pt-br]
 style: fill
 color: primary
 description: Neste primeiro post da série Terraform vamos entrar de cabeça no mundo de infrastrutura como código e entender para que serve o Terraform, onde ele habita, do que ele se alimenta, etc.
+language: 🇧🇷
 ---
 
 {% include elements/figure.html image="/assets/public/introducao-terraform-logo.svg" %}
