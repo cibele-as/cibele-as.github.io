@@ -7,7 +7,7 @@ description: Neste primeiro post da série Terraform vamos entrar de cabeça no 
 language: 🇧🇷
 ---
 
-{% include elements/figure.html image="/assets/public/introducao-terraform-logo.svg" %}
+{% include elements/figure.html image="/assets/public/introducao-terraform-logo.png" %}
 
 Antes de começar propriamente a falar de Terraform, gostaria primeiro de ressaltar que eu pretendo escrever uma série de artigos sobre este tema, desde instação e configuração do Terraform CLI até tópicos mais avançados como criação e publicação de módulos usando o Terraform Registry. Por isso, se você está lendo este post e se interessa por este assunto, deixa uma mensagem nos comentários. 
 
@@ -39,11 +39,11 @@ Terraform provê uma linguagem de alto nível e de fácil aprendizado, os desenv
 
 A partir dos arquivos de configuração criados pelos usuários, Terraform saberá quais componentes deverão ser criados ou alterados, para isso, Terraform cria um grafo de todos os componentes de infraestrutura e armazena em um arquivo de estado, dessa forma Terraform consegue construir a infraestrutura da maneira mais eficiente possível uma vez que, recursos que não possuem dependência em comum serão criados ou modificados de forma paralela, na prática se estamos criando uma VPC na AWS e associando alguns Security groups, Terraform saberá que a configuração necessária para criar os security groups dependem da VPC e, dessa forma, criará a VPC em primeiro lugar e depois os security groups.
 
-### AWS CLI
+### Provider e APIs
 
-Terraforma, por padrão, não sabe como criar recursos em todos os provedores, por isso utiliza as APIs disponibilizadas pelos próprios provedores para interagir com eles, tomando como exemplo a AWS, ela provê uma CLI (Command line interface) de código aberto, que pode ser acessado aqui, na qual podemos, via linha de comando, interagir com os serviços disponíveis sem precisar utilizar a interface Web, é dessa forma que Terraform sabe como criar os recursos que precisamos e possui inteligência de criar esses recursos de forma paralela quando não existe dependência entre eles, veremos nos capítulos seguintes como configuramos este acesso utilizando o recurso provider do Terraform. 
+Terraform, por padrão, não sabe como criar recursos em todos os provedores, por isso utiliza as APIs disponibilizadas pelos próprios provedores para interagir com eles, tomando como exemplo a AWS, ela provê uma CLI (Command line interface) de código aberto, que pode ser acessado aqui, na qual podemos, via linha de comando, interagir com os serviços disponíveis sem precisar utilizar a interface Web, é dessa forma que Terraform sabe como criar os recursos que precisamos e possui inteligência de criar esses recursos de forma paralela quando não existe dependência entre eles, veremos em futuros posts como configuramos este acesso utilizando o recurso `provider` do Terraform.
 
-### IAM Roles
+### Funções e Políticas (IAM)
 
 Na AWS utilizamos o serviço IAM (Identity and Access Management), como próprio nome sugere, para gerenciar o que usuários e serviços e podem fazer, com IAM podemos criar usuários e associar políticas (Policy) a eles, podemos criar funções (Roles) e atribuir à serviços. Para que o Terraform funcione de forma correta, precisamos conceder acesso a todos os serviços da AWS que serão gerenciados por ele, veremos na prática as abordagens que podemos utilizar para essa configuração e boas práticas nessa utilização.
 
