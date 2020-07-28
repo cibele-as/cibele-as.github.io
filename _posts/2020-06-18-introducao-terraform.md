@@ -29,7 +29,7 @@ Terraform é uma ferramenta de código aberto que nos ajuda a criar e manter inf
 
 Abaixo temos um diagrama de alto nível demonstrando de forma didática os componentes envolvidos quando trabalhamos com Terraform e AWS.
 
-{% include elements/figure.html image="/assets/public/introducao-terraform-basic-diagram.svg" %}
+{% include elements/figure.html image="/assets/public/introducao-terraform-basic-diagram.png" %}
 
 ### Usuários
 
