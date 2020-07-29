@@ -28,7 +28,7 @@ This guide assumes some basic familiarity with the usual Terraform init, plan an
 
 ## Implementation Scenario
 
-Using AWS Billings its possible to keep track of costs using a lot of approaches, for instance, resource tags where we can filter costs by a specific business or teams, resource names using amazon services names, etc. It is possible to set alarms
+Using AWS Billings it is possible to keep track of costs using a lot of approaches, for instance, resource tags where we can filter costs by a specific business or teams, resource names using amazon services names, etc. It is possible to set alarms
 when for forecast values or current values.
 
 In our study case, we have a `development account` in AWS and we use two services `EC2` and `S3`, looking into the previous 
