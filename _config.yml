@@ -4,7 +4,7 @@ keywords    : Topics in Devops, Terraform, AWS, CI/CD.
 description : Welcome! here I will share articles related to devops and programming in general. 
 baseurl     : ""     
 repository  : rribeiro1/rribeiro1.github.io
-remote_theme: rribeiro1/jekyll-theme
+remote_theme: rribeiro1/jekyll-ribeiro-theme
 
 ### Sitemap ###
 url: "https://rafaelribeiro.io"
