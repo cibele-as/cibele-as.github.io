@@ -1,8 +1,6 @@
 ---
 title: Testing CircleCI jobs locally
 tags: [CircleCI]
-style: fill
-color: dark
 language: 🇬🇧
 ---
 

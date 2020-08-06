@@ -1,48 +1,34 @@
 ---
 title: Budgets alarms for AWS accounts and services using Terraform
 tags: [aws, budgets, terraform, slack, email]
-style: fill
-color: success
 language: 🇬🇧
 ---
 
-Who never had a surprise when checking the billing panel from Amazon, google, or another cloud provider? It happened 
-with me, a couple of times when checking my AWS personal account and I am sure it happens with you as well as in your 
-organization 😅
+Who never had a surprise when checking the billing panel from Amazon, google, or another cloud provider? It happened with me, a couple of times actually and I am sure it happens with you as well as in your organization 😅
 
 ## Common problems and motivations 💸
 
-It’s not rare that we sometimes think a service would cost X and it ends up costing 2X in the final of the month, 
-sometimes we also create resources manually for experimentations and forget to clean them up, on the other hand, 
-it is not healthy to access the billings every day to check whether the costs are okay or not, so the best way 
-to avoid surprises at the end of the month would be automating this process and creating some sort of alarms when 
-something is wrong.
+It’s not rare that we sometimes think a service would cost X and it ends up costing 2X in the final of the month, sometimes we also create resources manually for experimentations and forget to clean them up, on the other hand, it is not healthy to access the budgets console every day to check whether the costs are okay or not, so the best way to avoid surprises would be automating this process and creating some sort of alarms when something goes wrong.
 
-Is this post we are going to create a process to keep track of our billings in AWS by defining a threshold in the account
-level as well as by services level and also creating an integration with Slack since I have seen that people prefer slack 
-rather than email, for that, we are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to send alarms from our account to a specific channel in Slack.
+Is this post we are going to create a process to keep track of our budgets in AWS by defining a threshold in the account level as well as by AWS services and also creating an integration with email or slack. We are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to receive alarms from our account to a specific channel in Slack.
 
 ## Prerequisites
 
-This guide assumes some basic familiarity with the usual Terraform init, plan and apply workflow. It also assumes that you have your terraform and AWS CLI properly configured.
+This guide assumes some basic familiarity with the usual Terraform workflow (init, plan and apply). It also assumes that you have your terraform and AWS CLI properly configured.
 
 ## Implementation Scenario
 
-Using AWS Billings it is possible to keep track of costs using a lot of approaches, for instance, resource tags where we can filter costs by a specific business or teams, resource names using amazon services names, etc. It is possible to set alarms
-when for forecast values or current values.
-
-In our study case, we have a `development account` in AWS and we use two services `EC2` and `S3`, looking into the previous 
-billing we usually pay for those:
+For our study case, let's say that we have a `development account` on AWS and we used to use two services `EC2` and `S3` which costs basically $20/month:
 
 - **EC2:** $ 10,00 
 - **S3:** $ 5,00
 
-We also want to reserve $ 5,00 in the account for eventual costs, in the end, what we need to achieve is:
+We also want to reserve $5,00 for eventual costs, in the end, what we need to achieve is:
 
 Receive an alert when:
 - Forecast amount for the `Development account` is `greater than 20,00`
-- Forecast amount for `EC2` is `greater than 10,00`
-- Forecast amount for `S3` is `greater than 5,00`
+- Forecast amount for `EC2` is `greater than $10,00`
+- Forecast amount for `S3` is `greater than $5,00`
 
 After implementing the module in terraform, we are going to use it like this:
 
@@ -66,21 +52,20 @@ module "billing_alarm" {
 
 ## Before Starting
 
-This guide aims to teach you how to create a module from scratch, however, if you in a hurry, you can just use the module by clicking on the button below.
+If you in a hurry, this module is ready to use in the Terraform Registry, check in the link below.
 
 {% include elements/button.html link="https://registry.terraform.io/modules/rribeiro1/budget-alarms/aws/0.0.2" text="Terraform Registry" block=true  style="primary" size="sm" %}
 
 ## Terraform Module Structure
 
-Let’s get started by creating a terraform module so that we can reuse in cases where we have more than one account, 
-our folder's structure will be something like this:
+Let’s get started by creating a terraform module so that we can reuse in cases where we have more than one account, our folder's structure will be something like this:
 
 ``` bash
 .
 ├── accounts
 │   └── development
 │       ├── budgets.tf
-│       └── provider.tf     
+│       └── provider.tf # We are not configuring this in this post.
 │       
 └── modules
     └── budgets
@@ -89,7 +74,7 @@ our folder's structure will be something like this:
         └── variables.tf
 ```
 
-#### Input Variables 
+#### Input Variables
 
 First, create the directory `modules/budgets` and the file `variables.tf`, it will have input variables for our module:
 
@@ -100,9 +85,13 @@ First, create the directory `modules/budgets` and the file `variables.tf`, it wi
 ```tf
 # modules/budgets/variables.tf
 
-variable "account_name" {}
+variable "account_name" {
+  type = string
+}
 
-variable "account_budget_limit" {}
+variable "account_budget_limit" {
+  type = string
+}
 
 variable "services" {
   description = "List of AWS services to be monitored in terms of costs"
@@ -115,8 +104,7 @@ variable "services" {
 
 #### Services Helper
 
-The name of the service should match the name AWS expects otherwise the filter will not work properly, thus, we can create a support map to define some common services (if the service you want is not listed here you can add it later), in the same folder create a new
-file called `service.tf`
+The name of the service should match the name AWS expects otherwise the filter will not work properly, thus, we can create a support map to define some common services (if the service you want is not listed here you can add it later), in the same folder create a new file called `service.tf`
 
 ```tf
 # modules/budgets/service.tf

@@ -1,8 +1,6 @@
 ---
 title: "Terraform loops: from count to for_each"
 tags: [aws, terraform, for_each, count]
-style: fill
-color: light
 description: Terraform users from version 0.11 may have dynamically created some resources using the count statement, very handy to apply DRY principle and scale resources by simply increment an element in a list or number.
 language: 🇬🇧
 ---
@@ -139,7 +137,7 @@ module "users" {
 }
 ```
 
-After plan our infrastructure again, we would expect to terraform only destroy one resource, however, we can see that not only one resource will be destroyed but also two will be updated. 🤔
+After plan our infrastructure again, we would expect terraform to destroy only one resource, however, we can see that not only one resource will be destroyed but also two will be updated. 🤔
 
 ``` bash
 An execution plan has been generated and is shown below.
