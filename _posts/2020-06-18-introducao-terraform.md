@@ -2,10 +2,11 @@
 title: Introdução ao Terraform
 tags: [introdução terraform, terraform, aws, pt-br]
 description: Neste primeiro post da série Terraform vamos entrar de cabeça no mundo de infrastrutura como código e entender para que serve o Terraform, onde ele habita, do que ele se alimenta, etc.
+image: https://bs-uploads.toptal.io/blackfish-uploads/blog/post/seo/og_image_file/og_image/15459/terraform-aws-cloud-iac-94781f863433b6decb90fdc2b4a6c756.png
 language: 🇧🇷
 ---
 
-{% include elements/figure.html image="/assets/public/introducao-terraform-logo.png" %}
+{% include elements/figure.html image="https://bs-uploads.toptal.io/blackfish-uploads/blog/post/seo/og_image_file/og_image/15459/terraform-aws-cloud-iac-94781f863433b6decb90fdc2b4a6c756.png" %}
 
 Este é o primeiro post da série sobre este tema, vamos falar de tópicos partindo desde instação e configuração do Terraform CLI até assuntos mais avançados como criação e publicação de módulos no Terraform Registry. Por isso, se você está lendo este post e se interessa por este assunto, deixa uma mensagem nos comentários.
 
