@@ -4,11 +4,11 @@ tags: [aws, budgets, terraform, slack, email]
 language: 🇬🇧
 ---
 
-Who never had a surprise when checking the billing panel from Amazon, google, or another cloud provider? It happened with me, a couple of times actually and I am sure it happens with you as well as in your organization 😅
+Who never had a surprise while checking the billing panel from Amazon, google, or another cloud provider? It happened to me, a couple of times actually, and I am sure it happens to you as well as in your organization 😅
 
 ## Common problems and motivations 💸
 
-It’s not rare that we sometimes think a service would cost X and it ends up costing 2X in the final of the month, sometimes we also create resources manually for experimentations and forget to clean them up, on the other hand, it is not healthy to access the budgets console every day to check whether the costs are okay or not, so the best way to avoid surprises would be automating this process and creating some sort of alarms when something goes wrong.
+It’s not rare that we sometimes think a service would cost X, and it ends up costing 2X in the final of the month, sometimes we also create resources manually for experimentation and forget to clean them up, on the other hand, it is not healthy to access the budgets console every day to check whether the costs are okay or not, so the best way to avoid surprises would be automating this process and creating some sort of alarms when something goes wrong.
 
 Is this post we are going to create a process to keep track of our budgets in AWS by defining a threshold in the account level as well as by AWS services and also creating an integration with email or slack. We are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to receive alarms from our account to a specific channel in Slack.
 
@@ -18,7 +18,7 @@ This guide assumes some basic familiarity with the usual Terraform workflow (ini
 
 ## Implementation Scenario
 
-For our study case, let's say that we have a `development account` on AWS and we used to use two services `EC2` and `S3` which costs basically $20/month:
+For our study case, let's say that we have a `development account` on AWS, and we used to use two services `EC2` and `S3` which costs basically $20/month:
 
 - **EC2:** $ 10,00 
 - **S3:** $ 5,00
@@ -54,11 +54,11 @@ module "billing_alarm" {
 
 If you in a hurry, this module is ready to use in the Terraform Registry, check in the link below.
 
-{% include elements/button.html link="https://registry.terraform.io/modules/rribeiro1/budget-alarms/aws/0.0.2" text="Terraform Registry" block=true  style="primary" size="sm" %}
+{% include elements/button.html link="https://registry.terraform.io/modules/rribeiro1/budget-alarms/aws" text="Terraform Registry" block=true  style="primary" size="sm" %}
 
 ## Terraform Module Structure
 
-Let’s get started by creating a terraform module so that we can reuse in cases where we have more than one account, our folder's structure will be something like this:
+Let’s get started by creating a Terraform module so that we can reuse in cases where we have more than one account, our folder's structure will be something like this:
 
 ``` bash
 .
@@ -155,7 +155,7 @@ locals {
   }
 }
 ```
-Now, we can implement the budgets module, let's start by creating a SNS topic so that when an alarm is triggered, it will send a message in this topic and everyone subscribed in this topic will receive the message, in our case, it will be the email app for slack, we will get into that later.
+Now, we can implement the budgets' module, let's start by creating a SNS topic so that when an alarm is triggered, it will send a message in this topic and everyone subscribed in this topic will receive the message, in our case, it will be the email app for slack, we will get into that later.
 
 #### Budget Module
 
