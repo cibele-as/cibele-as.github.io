@@ -4,31 +4,31 @@ tags: [aws, budgets, terraform, slack, email]
 language: 🇬🇧
 ---
 
-Who never had a surprise while checking the billing panel from Amazon, google, or another cloud provider? It happened to me, a couple of times actually, and I am sure it happens to you as well as in your organization 😅
+Who never surprised while checking the billing panel from Amazon, Google, or another cloud provider? It happened to me a couple of times, actually, and I am sure it happens to you as well as in your organization 😅
 
 ## Common problems and motivations 💸
 
-It’s not rare that we sometimes think a service would cost X, and it ends up costing 2X in the final of the month, sometimes we also create resources manually for experimentation and forget to clean them up, on the other hand, it is not healthy to access the budgets console every day to check whether the costs are okay or not, so the best way to avoid surprises would be automating this process and creating some sort of alarms when something goes wrong.
+It’s not rare that we sometimes think service would cost X, and it ends up costing 2X at the final of the month, sometimes we also create resources manually for experimentation and forget to clean them up. On the other hand, it is not healthy to access the budget console every day to check whether the costs are okay or not, so the best way to avoid surprises would be automating this process and creating some alarms when something goes wrong.
 
-Is this post we are going to create a process to keep track of our budgets in AWS by defining a threshold in the account level as well as by AWS services and also creating an integration with email or slack. We are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to receive alarms from our account to a specific channel in Slack.
+In this post, we will create a process to keep track of our budgets in AWS by defining a threshold in the account level and AWS services and making integration with email or Slack. We are going to use [Terraform](https://www.terraform.io/) and the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration to receive alarms from our account to a specific channel in Slack.
 
 ## Prerequisites
 
-This guide assumes some basic familiarity with the usual Terraform workflow (init, plan and apply). It also assumes that you have your terraform and AWS CLI properly configured.
+This guide assumes some basic familiarity with the usual Terraform workflow (init, plan and apply). It also takes that you have your terraform and AWS CLI adequately configured.
 
 ## Implementation Scenario
 
-For our study case, let's say that we have a `development account` on AWS, and we used to use two services `EC2` and `S3` which costs basically $20/month:
+For our study case, let's say that we have a `development account` on AWS, and we used to use two services `EC2` and `S3`, which costs $20/month:
 
-- **EC2:** $ 10,00 
-- **S3:** $ 5,00
+- **EC2:** $ 10.00 
+- **S3:** $ 5.00
 
-We also want to reserve $5,00 for eventual costs, in the end, what we need to achieve is:
+We also want to reserve $5,00 for eventual costs. In the end, what we need to achieve is:
 
 Receive an alert when:
-- Forecast amount for the `Development account` is `greater than 20,00`
-- Forecast amount for `EC2` is `greater than $10,00`
-- Forecast amount for `S3` is `greater than $5,00`
+- Forecast amount for the `Development account` is `greater than 20.00`
+- Forecast amount for `EC2` is `greater than $10.00`
+- Forecast amount for `S3` is `greater than $5.00`
 
 After implementing the module in terraform, we are going to use it like this:
 
@@ -52,26 +52,26 @@ module "billing_alarm" {
 
 ## Before Starting
 
-If you in a hurry, this module is ready to use in the Terraform Registry, check in the link below.
+If you in a hurry, this module is ready to use in the Terraform Registry. Check in the link below.
 
 {% include elements/button.html link="https://registry.terraform.io/modules/rribeiro1/budget-alarms/aws" text="Terraform Registry" block=true  style="primary" size="sm" %}
 
 ## Terraform Module Structure
 
-Let’s get started by creating a Terraform module so that we can reuse in cases where we have more than one account, our folder's structure will be something like this:
+Let's get started by creating a Terraform module so that we can reuse it in cases where we have more than one account, our folder's structure will be something like this:
 
 ``` bash
 .
 ├── accounts
-│   └── development
-│       ├── budgets.tf
-│       └── provider.tf # We are not configuring this in this post.
-│       
+│        └── development
+│            ├── budgets.tf
+│            └── provider.tf # We are not configuring this in this post.
+│     
 └── modules
-    └── budgets
-        ├── main.tf
-        ├── services.tf
-        └── variables.tf
+         └── budgets
+                 ├── main.tf
+                 ├── services.tf
+                 └── variables.tf
 ```
 
 #### Input Variables
@@ -104,7 +104,7 @@ variable "services" {
 
 #### Services Helper
 
-The name of the service should match the name AWS expects otherwise the filter will not work properly, thus, we can create a support map to define some common services (if the service you want is not listed here you can add it later), in the same folder create a new file called `service.tf`
+The name of the service should match the name AWS expects. Otherwise, the filter will not work correctly. Thus, we can create a support map to define some standard services (if the service you want is not listed here, you can add it later). In the same folder, create a new file called `service.tf`
 
 ```tf
 # modules/budgets/service.tf
@@ -155,11 +155,11 @@ locals {
   }
 }
 ```
-Now, we can implement the budgets' module, let's start by creating a SNS topic so that when an alarm is triggered, it will send a message in this topic and everyone subscribed in this topic will receive the message, in our case, it will be the email app for slack, we will get into that later.
+Now, we can implement the budget module. Let's start by creating an SNS topic so that when an alarm is triggered, it will send a message on this topic, and everyone subscribed to this topic will receive the message, in our case, it will be the email app for slack, we will get into that later.
 
 #### Budget Module
 
-Here we are creating a new topic and defining a policy that allows AWS budgets to Publish Message.
+Here we are creating a new topic and defining a policy that allows AWS budgets to Publish Messages.
 
 ```tf
 # modules/budgets/main.tf
@@ -225,7 +225,7 @@ resource "aws_budgets_budget" "budget_account" {
 }
 ```
 
-The last resource will be the budgets for services, it will receive a list of services and create a budget for each one.
+The last resource will be the budgets for services. It will receive a list of services and create a budget entry for each one.
 
 ```tf
 # modules/budgets/main.tf
@@ -260,7 +260,7 @@ resource "aws_budgets_budget" "budget_resources" {
 }
 ```
 
-The module is complete, now we can easily reuse in our amazon accounts, to do so, create a `budgets.tf`
+The module is complete. Now we can easily reuse in our amazon accounts, to do so, create a `budgets.tf`
 in the account folder and import the module, like this:
 
 ```tf
@@ -293,7 +293,7 @@ $ terraform plan
 $ terraform apply
 ```
 
-After applying you should have the budgets as shown below:
+After applying, you should have the budgets as shown below:
 
 ![budgets.png](/assets/public/budgets.png)
 
@@ -305,19 +305,19 @@ Last step is to subscribe to this topic via Email app in Slack or any email.
 
 ## Slack or Email Integration 
 
-If you have a slack paid plan, you can use the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration, it provides a custom email to be used in the slack channel, thus, every email that is sent to this account will appear in the channel.
+If you have a slack paid plan, you can use the [Email Slack App](https://slack.com/apps/A0F81496D-email) integration. It provides a custom email to be used in the slack channel. Thus, every email that is sent to this account will appear in the channel.
 
-I don't have a pro slack plan, so for simplicity, I will use my email for it, however, the process would be the same using the email integration app or email. 
+I don't have a pro slack plan, so for simplicity, I will use my email for it. However, the process would be the same using the email integration app or email.
 
-**Note:** This part of the process is not supported by Terraform, so we are going to do it manually. 
+**Note:** Terraform does not support this part of the process, so that we will do it manually.
 
 ### Subscribing the email to the topic
 
-Go to SNS panel in AWS and select `Subscriptions` and create a new subscription by choosing the topic that was created in the previous step and in Protocol chose **email**, after creating the subscription you should receive an email from AWS SNS.
+Go to the SNS panel in AWS and select `Subscriptions` and create a new subscription by choosing the topic that was created in the previous step and in Protocol chose **email**, after completing the subscription, you should receive an email from AWS SNS.
 
 ![subscription.png](/assets/public/subscription.png)
 
-From now on, every time you hit a threshold you will receive an email notification like this:
+From now on, every time you hit a threshold, you will receive an email notification like this:
 
 ```
 AWS Budget Notification May 04, 2020
