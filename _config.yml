@@ -1,13 +1,13 @@
 ### Site Settings ###
-title       : Rafael Ribeiro
-keywords    : Topics in Devops, Terraform, AWS, CI/CD. 
-description : Welcome! here I will share articles related to devops and programming in general. 
+title       : Cibele Alves da Silva
+keywords    : UX Designer, Figma, Miro, Prototype, Test, Case Study, Usability, Validation, UI Designer.
+description : Welcome! here I will share my Portfolio & Projects.
 baseurl     : ""
-repository  : rribeiro1/rribeiro1.github.io
+repository  : cibele-as/cibele-as.github.io
 remote_theme: YoussefRaafatNasry/portfolYOU
 
 ### Sitemap ###
-url: "https://rafaelribeiro.io"
+url: "https://cibelealves.io"
 
 ### Plugins ###
 plugins:
@@ -21,20 +21,20 @@ nav_exclude:                                            # The following paths ar
   
 ### Author Info ###
 author:
-  name              : Ribeiro
-  image             : https://avatars1.githubusercontent.com/u/20430410?s=460&u=2d33b83f5119f054888df7f8a9805441e1582b73&v=4
+  name              : Cibele
+  image             : https://avatars.githubusercontent.com/u/80886677?v=4
 # behance           : your_username
 # dribbble          : your_username
-  email             : rafael.pr10@gmail.com
+  email             : cibele.as10@gmail.com
 # facebook          : your_username
-  github            : rribeiro1
+  github            : cibele-as
 # gitlab            : your_username
-  instagram         : rafprib
-  linkedin          : rribeiro10
+  instagram         : cibele.as10
+  linkedin          : cibeleas
 # medium            : your_username
 # soundcloud        : your_username
 # spotify           : your_username
-  stackoverflow     : 7690356
+# stackoverflow     : 7690356
 # tumblr            : your_username.tumblr.com
 # twitch            : your_username
 # twitter           : your_username
@@ -48,10 +48,10 @@ disqus: rribeiro1-github-io
 adsense: ca-pub-1181535768755677
 
 ### Analytics ###
-analytics:
-  enabled: true  # Set false to disable analytics feature
-  google:
-    tracking_id: UA-163302221-1 # your google analytics tracking-id
+##analytics:
+##  enabled: true  # Set false to disable analytics feature
+  ##google:
+    #tracking_id: UA-163302221-1 # your google analytics tracking-id
 
 ### Posts ###
 permalink: /blog/:title
