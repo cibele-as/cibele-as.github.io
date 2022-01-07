@@ -2,16 +2,15 @@
 title       : Rafael Ribeiro
 keywords    : Topics in Devops, Terraform, AWS, CI/CD. 
 description : Welcome! here I will share articles related to devops and programming in general. 
-baseurl     : ""     
+baseurl     : ""
 repository  : rribeiro1/rribeiro1.github.io
-remote_theme: rribeiro1/jekyll-ribeiro-theme
+remote_theme: YoussefRaafatNasry/portfolYOU
 
 ### Sitemap ###
 url: "https://rafaelribeiro.io"
 
 ### Plugins ###
 plugins:
-  - jemoji
   - jekyll-sitemap
 
 ### Navbar Settings ###
